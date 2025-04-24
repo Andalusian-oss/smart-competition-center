@@ -131,11 +131,10 @@ private:
         QFont defaultFont("Segoe UI", 10);
         QApplication::setFont(defaultFont);
     }
-
     void populateData() {
-        addEmployeeRow({"1", "John Doe", "Engineering", "john@company.com"});
-        addEmployeeRow({"2", "Jane Smith", "Marketing", "jane@company.com"});
-        addEmployeeRow({"3", "Bob Wilson", "Sales", "bob@company.com"});
+        addEmployeeRow({"1", "Mohamed Ali Khmiri", "Engineering", "john@company.com"});
+        addEmployeeRow({"2", "Dhia Jelibeans", "Marketing", "jane@company.com"});
+        addEmployeeRow({"3", "Hadil Wilson", "Sales", "bob@company.com"});
     }
 
     void addEmployeeRow(const QStringList &data) {
