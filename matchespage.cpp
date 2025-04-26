@@ -76,7 +76,7 @@ MatchesPage::MatchesPage(QWidget *parent)
 
 void MatchesPage::setupUI()
 {
-    titleLabel = new QLabel("Matches Page");
+    titleLabel = new QLabel("Matches");
     titleLabel->setObjectName("title-label");
 
     searchLineEdit = new QLineEdit();
