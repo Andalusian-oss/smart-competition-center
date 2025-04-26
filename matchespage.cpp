@@ -12,15 +12,12 @@ MatchesPage::MatchesPage(QWidget *parent)
     setupTableHeader();
     populateTable();
 
-    // Apply the stylesheet after UI is set up
     this->setStyleSheet(R"(
-        /* Base Styles */
         QWidget {
-            background-color: #89CFF0; /* Baby blue background */
+            background-color: #89CFF0;
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Title */
         QLabel#title-label {
             font-size: 24px;
             font-weight: 700;
@@ -28,7 +25,6 @@ MatchesPage::MatchesPage(QWidget *parent)
             padding: 8px 0;
         }
 
-        /* Search Bar */
         QLineEdit#search-bar {
             border: 1px solid #cbd5e1;
             border-radius: 6px;
@@ -45,7 +41,6 @@ MatchesPage::MatchesPage(QWidget *parent)
             box-shadow: 0 0 0 1px #3b82f6;
         }
 
-        /* Table */
         QTableWidget {
             background-color: transparent;
             border: none;
@@ -60,7 +55,6 @@ MatchesPage::MatchesPage(QWidget *parent)
             font-weight: bold;
         }
 
-        /* Buttons */
         QPushButton {
             background-color: #3b82f6;
             color: white;
@@ -74,7 +68,6 @@ MatchesPage::MatchesPage(QWidget *parent)
             background-color: #2563eb;
         }
 
-        /* Chart */
         QChartView {
             background-color: transparent;
         }
@@ -83,11 +76,9 @@ MatchesPage::MatchesPage(QWidget *parent)
 
 void MatchesPage::setupUI()
 {
-    // Title
     titleLabel = new QLabel("Matches Page");
     titleLabel->setObjectName("title-label");
 
-    // Search Bar and Buttons
     searchLineEdit = new QLineEdit();
     searchLineEdit->setObjectName("search-bar");
     connect(searchLineEdit, &QLineEdit::textChanged, this, &MatchesPage::filterMatches);
@@ -101,23 +92,25 @@ void MatchesPage::setupUI()
         sortTable(0);
     });
 
-    // Table
     matchesTable = new QTableWidget();
-    matchesTable->setColumnCount(3);
-    matchesTable->setHorizontalHeaderLabels(QStringList() << "Name" << "Date" << "Status");
+    matchesTable->setColumnCount(6); // 6 columns now
+    matchesTable->setHorizontalHeaderLabels(QStringList()
+                                            << "ID Match"
+                                            << "Équipe A"
+                                            << "Équipe B"
+                                            << "Date"
+                                            << "Score"
+                                            << "Status");
     matchesTable->horizontalHeader()->setStretchLastSection(true);
 
-    // Chart
     chartView = new QChartView(new QChart());
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    // CRUD Buttons
     addMatchButton = new QPushButton("Add Match");
     editMatchButton = new QPushButton("Edit Match");
     deleteMatchButton = new QPushButton("Delete Match");
     viewMatchButton = new QPushButton("View Match");
 
-    // Layouts
     QHBoxLayout *topLayout = new QHBoxLayout();
     topLayout->addWidget(titleLabel);
     topLayout->addStretch();
@@ -130,11 +123,12 @@ void MatchesPage::setupUI()
     buttonsLayout->addWidget(editMatchButton);
     buttonsLayout->addWidget(deleteMatchButton);
     buttonsLayout->addWidget(viewMatchButton);
+    buttonsLayout->addStretch();
 
     mainLayout = new QVBoxLayout(this);
     mainLayout->addLayout(topLayout);
-    mainLayout->addWidget(matchesTable);
     mainLayout->addLayout(buttonsLayout);
+    mainLayout->addWidget(matchesTable);
     mainLayout->addWidget(chartView);
 }
 
@@ -147,15 +141,17 @@ void MatchesPage::populateTable()
 {
     matchesTable->setRowCount(5);
     for (int row = 0; row < 5; ++row) {
-        matchesTable->setItem(row, 0, new QTableWidgetItem(QString("Match %1").arg(row + 1)));
-        matchesTable->setItem(row, 1, new QTableWidgetItem("2025-04-01"));
-        matchesTable->setItem(row, 2, new QTableWidgetItem("Active"));
+        matchesTable->setItem(row, 0, new QTableWidgetItem(QString::number(1000 + row))); // ID Match
+        matchesTable->setItem(row, 1, new QTableWidgetItem(QString("Team A%1").arg(row + 1))); // Équipe A
+        matchesTable->setItem(row, 2, new QTableWidgetItem(QString("Team B%1").arg(row + 1))); // Équipe B
+        matchesTable->setItem(row, 3, new QTableWidgetItem("2025-04-01")); // Date
+        matchesTable->setItem(row, 4, new QTableWidgetItem(QString("%1 - %2").arg(row + 1).arg(row + 2))); // Score (ex: "1 - 2")
+        matchesTable->setItem(row, 5, new QTableWidgetItem(row % 2 == 0 ? "Active" : "Inactive")); // Status
     }
 
-    // Populate chart with simple data
     QPieSeries *series = new QPieSeries();
-    series->append("Active", 4);
-    series->append("Inactive", 1);
+    series->append("Active", 3);
+    series->append("Inactive", 2);
 
     chartView->chart()->addSeries(series);
     chartView->chart()->setTitle("Match Status Overview");
@@ -166,7 +162,7 @@ void MatchesPage::filterMatches(const QString &text)
     for (int row = 0; row < matchesTable->rowCount(); ++row) {
         bool match = false;
         for (int col = 0; col < matchesTable->columnCount(); ++col) {
-            if (matchesTable->item(row, col)->text().contains(text, Qt::CaseInsensitive)) {
+            if (matchesTable->item(row, col) && matchesTable->item(row, col)->text().contains(text, Qt::CaseInsensitive)) {
                 match = true;
                 break;
             }

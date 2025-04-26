@@ -1,0 +1,71 @@
+create a tables that  present table of employes ,and add actions with  actions like edit , or delete
+
+
+sers\MSI\Desktop\smart-competition-center>
+▴  7: git add .
+▒  8: git status
+▒  9: git commit -m "CRUD match"
+▒ 10: git config --global user.email "mariem.talebali@esprit.tn"
+▒ 11: git config --global user.name "mariemTA"
+▒ 12: git commit -m "CRUD match"
+▒ 13: git status
+▒ 14: git branch
+▒ 15: git log
+▒ 16: git push
+▒ 17: git push --set-upstream origin matchs
+▒ 18: git status
+
+
+
+
+
+
+doskey /history
+git status
+git branch
+git checkout -b matchs
+git status
+git branch
+git branch -v
+git status
+git add .
+git status
+git commit -m "CRUD match"
+git config --global user.email "mariem.talebali@esprit.tn"
+git config --global user.name "mariemTA"
+git commit -m "CRUD match"
+git status
+git branch
+git log
+git push
+git push --set-upstream origin matchs
+git status
+history
+doskey
+doskey /history
+
+
+
+
+
+
+
+git diff
+
+git clone https://github.com/Andalusian-oss/smart-competition-center
+git clone https://github.com/Andalusian-oss/smart-competition-center  mon dossier
+cd ~/Documents
+cd Desktop
+git clone https://github.com/Andalusian-oss/smart-competition-center
+ls
+git clone https://github.com/Andalusian-oss/smart-competition-center .git
+git clone https://github.com/Andalusian-oss/smart-competition-center.git
+git status
+cd smart-competition-center
+explorere .
+explorer .
+git status
+git diff
+git status
+git diff matchespage.cpp
+doskey /history
