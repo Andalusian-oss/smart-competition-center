@@ -9,6 +9,7 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
+
 class TerrainsPage : public QWidget
 {
     Q_OBJECT
@@ -16,11 +17,26 @@ class TerrainsPage : public QWidget
 public:
     explicit TerrainsPage(QWidget *parent = nullptr);
 
+private slots:
+    void addTerrain();
+    void editSelectedTerrain();
+    void deleteSelectedTerrain();
+    void viewSelectedTerrain();
+
 private:
+    void setupUI();
+    void openTerrainDialog(bool isEdit = false, int row = -1);
+    void refreshChart();
+
+    QVBoxLayout *mainLayout;
+    QLabel *titleLabel;
     QTableWidget *terrainsTable;
     QPushButton *addButton;
+    QPushButton *editButton;
+    QPushButton *deleteButton;
+    QPushButton *viewButton;
     QChartView *chartView;
-    void setupUI();
+    QPieSeries *series;
 };
 
 #endif // TERRIANSPAGE_H
