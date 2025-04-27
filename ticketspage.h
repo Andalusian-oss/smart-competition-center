@@ -2,27 +2,41 @@
 #define TICKETSPAGE_H
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QLabel>
 #include <QTableWidget>
 #include <QPushButton>
-#include <QtCharts/QChartView>
-#include <QtCharts/QPieSeries>
-#include <QtCharts/QPieSlice>
+#include <QVBoxLayout>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QLabel>
+#include <QDateTimeEdit>
+
 class TicketsPage : public QWidget
 {
     Q_OBJECT
 
 public:
     explicit TicketsPage(QWidget *parent = nullptr);
-    void setupUI();
+
+private slots:
+    void addTicket();
+    void editSelectedTicket();
+    void deleteSelectedTicket();
+    void viewSelectedTicket();
+    void searchTickets();
+    void sortTickets(int index);
 
 private:
-    QVBoxLayout *mainLayout;
-    QLabel *titleLabel;
     QTableWidget *ticketsTable;
     QPushButton *addTicketButton;
-    QChartView *chartView;
+    QPushButton *editTicketButton;
+    QPushButton *deleteTicketButton;
+    QPushButton *viewTicketButton;
+    QLineEdit *searchBar;
+    QComboBox *sortComboBox;
+
+    void setupUI();
+    void populateTable();
+    void addOrEditTicketDialog(bool isEdit, int row);  // New method to handle add/edit dialogs
 };
 
 #endif // TICKETSPAGE_H
