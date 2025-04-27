@@ -12,6 +12,10 @@
 #include <QLineEdit>
 #include <QToolButton>
 #include <QHeaderView>
+#include <QDialog>
+#include <QDateEdit>
+#include <QDialogButtonBox>
+#include <QMessageBox>
 
 class MatchesPage : public QWidget
 {
@@ -23,11 +27,16 @@ public:
 private slots:
     void filterMatches(const QString &text);
     void sortTable(int column);
+    void openAddMatchDialog();
+    void editMatch(); // Edit Functionality
+    void deleteMatch(); // Delete Functionality
+    void viewMatch(); // View Functionality
 
 private:
     void setupUI();
     void setupTableHeader();
     void populateTable();
+    void createAddMatchDialog();
 
     // UI Elements
     QLabel *titleLabel;
@@ -46,6 +55,13 @@ private:
     // Layouts
     QVBoxLayout *mainLayout;
     bool currentSortOrder;
+
+    // Dialog Elements
+    QDialog *addMatchDialog;
+    QLineEdit *matchIDEdit;
+    QLineEdit *teamAEdit;
+    QLineEdit *teamBEdit;
+    QDateEdit *dateEdit;
 };
 
 #endif // MATCHESPAGE_H
